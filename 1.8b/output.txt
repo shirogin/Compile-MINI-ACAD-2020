@@ -1,0 +1,64 @@
+1-	| KEYWORD : PROGRAM  | IDF : Nom 
+2-	    | KEYWORD : var  | IDF : X  | SEPRATOR : :  | TYPE : INT  | EOI : £ 
+3-	    | KEYWORD : var  | IDF : Z  | SEPRATOR : ||  | IDF : Y  | SEPRATOR : :  | TYPE : FLOAT  | EOI : £ 
+4-	    | KEYWORD : var  | IDF : L  | SEPRATOR : ||  | IDF : K  | SIZE : [20]  | SEPRATOR : :  | ATYPE : [INT]  | EOI : £ 
+5-	    | KEYWORD : Let  | IDF : D  | SEPRATOR : :  | TYPE : INT  | AFFECT : =  | INTEGER : 5  | EOI : £ 
+6-	    | KEYWORD : Let  | IDF : S  | SEPRATOR : :  | TYPE : STRING  | AFFECT : =  | STRING : «dedf»  | EOI : £ 
+7-	    | KEYWORD : Let  | IDF : F  | SEPRATOR : :  | TYPE : FLOAT  | AFFECT : =  | FLOAT : 5.2  | EOI : £ 
+8-	    | KEYWORD : Let  | IDF : F2  | SEPRATOR : :  | TYPE : FLOAT  | AFFECT : =  | FLOAT : 532.2  | EOI : £ 
+9-	    | KEYWORD : Let  | IDF : C  | SEPRATOR : :  | TYPE : CHAR  | AFFECT : =  | CHAR : 'd'  | EOI : £ 
+10-	| KEYWORD : BEGIN 
+11-	    | A Comment : //ferfge
+12-	    regre
+13-	    gerrg//
+14-	    | IDF : Z | SIZE : [5] | AFFECT : = | IDF : X  | EOI : £ Z [5] = X 
+15-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | AFFECT : = | IDF : D | EOI : £ Z [X] = D 
+16-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | EOI : £ Z [X] 
+17-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | EOI : £ X = ( 5 ) 
+18-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | ARTH_OP : /  | INTEGER : 0  | EOI : £ X = ( 5 ) / 0 
+19-	    | IDF : Z | EOI : £ Z 
+20-	    | IDF : L  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | IDF : Z  | ARTH_OP : -  | IDF : L  | ARTH_OP : *  | SEPRATOR : ( | IDF : Z  | ARTH_OP : /  | IDF : X | SEPRATOR : ) | ARTH_OP : + 
+21-	    | IDF : Z  | ARTH_OP : -  | IDF : D  | EOI : £ L = 5 + Z - L * ( Z / X ) + Z - D 
+22-	    | IDF : Z  | ARTH_OP : -  | FLOAT : -200.5  | ARTH_OP : +  | SEPRATOR : ( | IDF : D  | AFFECT : =  | INTEGER : 5 | SEPRATOR : )  | EOI : £ Z - -200.5 + ( D = 5 ) 
+23-	    | IDF : D  | AFFECT : =  | STRING : «FEFPK» | EOI : £ D = FEFPK 
+24-	    | IDF : D  | AFFECT : =  | CHAR : 'f' | EOI : £ D = f 
+25-	    | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D << Z | SEPRATOR : : | SEPRATOR : { 
+26-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X = 5 + 8 
+27-	        | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D << Z | SEPRATOR : : | SEPRATOR : { 
+28-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X = 5 + 8 
+29-	            | KEYWORD : RETURN  | SEPRATOR : ( | IDF : D | SEPRATOR : ) 
+30-	        | SEPRATOR : } 
+31-	        | KEYWORD : ELSE  | SEPRATOR : : | SEPRATOR : { 
+32-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ D X = 5 + 4 
+33-	            | KEYWORD : RETURN  | SEPRATOR : ( | IDF : Z | SEPRATOR : ) 
+34-	        | SEPRATOR : } 
+35-	        | KEYWORD : END_IF 
+36-	        | KEYWORD : RETURN  | SEPRATOR : ( | IDF : D | AFFECT : = | INTEGER : 5 | SEPRATOR : ) 
+37-	    | SEPRATOR : } 
+38-	    | KEYWORD : ELSE  | SEPRATOR : : | SEPRATOR : { 
+39-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ Z D = 5 X = 5 + 4 
+40-	        | KEYWORD : RETURN  | SEPRATOR : ( | IDF : Z | SEPRATOR : ) 
+41-	    | SEPRATOR : } 
+42-	    | KEYWORD : END_IF 
+43-	    | KEYWORD : FOR  | SEPRATOR : ( | IDF : X  | SEPRATOR : :  | INTEGER : 1  | SEPRATOR : :  | IDF : X | LOGIC_OP : == | INTEGER : 100 | SEPRATOR : ) Z X == 100 
+44-	        | IDF : Z | AFFECT : =  | IDF : D | ARTH_OP : + | IDF : Z | EOI : £ Z = D + Z 
+45-	    | KEYWORD : END_FOR 
+46-	    | KEYWORD : GET | SEPRATOR : ( | STRING : «%»  | SEPRATOR : :  | SPECIAL : @  | IDF : Z | SEPRATOR : ) | EOI : £ 
+47-	    | KEYWORD : SHOW | SEPRATOR : ( | STRING : «Z: %»  | SEPRATOR : :  | IDF : Z | SEPRATOR : ) | EOI : £ 
+48-	
+49-	| KEYWORD : END 
+------------------ IDF Table ------------------
+Entity: C  -  Type: CHAR  -  Value: d CONST
+Entity: F2  -  Type: FLOAT  -  Value: 532.200012 CONST
+Entity: F  -  Type: FLOAT  -  Value: 5.200000 CONST
+Entity: S  -  Type: STRING  -  Value: dedf CONST
+Entity: D  -  Type: INT  -  Value: 5 CONST
+Entity: K  -  Type: INT  -  Value: [ 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ]
+Entity: L  -  Type: INT  -  Value: [ 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ]
+Entity: Y  -  Type: FLOAT  -  Value: [ 0.000000 ]
+Entity: Z  -  Type: FLOAT  -  Value: [ 564.000000 ]
+Entity: X  -  Type: INT  -  Value: [ 0 ]
+Entity: Nom  -  Type: INT  -  Value: 0 CONST
+
+------------------ Comments Table ------------------
+//ferfge	    regre	    gerrg// 

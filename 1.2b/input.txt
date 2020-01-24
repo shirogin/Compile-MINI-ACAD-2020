@@ -1,0 +1,29 @@
+PROGRAM Nom
+    var X : INT £
+    var Z || Y : FLOAT £
+    var L || K [20] : [INT] £
+    Let D : INT = 5 £
+BEGIN
+    //ferfge
+    regre
+    gerrg//
+    Z[5] £
+    X = (-5) £
+    L = 5 + Z - L * (Z / X)+
+    Z - D £
+    Z - (-200.5) + (D = 5) £
+    D = «FEFPK»£
+    D='f'£
+    IF(D<<Z):{
+        X = 5 + 8 £
+    }
+    ELSE :{
+        X = 5 + 4£ 
+    }
+    END_IF
+    FOR (X : 41 : X==100)
+        Z= D+Z£
+    END_FOR
+    GET(«FEFPK» : @ D)£
+    SHOW(«FEFPK» : D)£
+END

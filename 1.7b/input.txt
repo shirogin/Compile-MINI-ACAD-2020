@@ -1,0 +1,49 @@
+PROGRAM Nom
+    var X : INT £
+    var Z || Y : FLOAT £
+    var L || K [20] : [INT] £
+    Let D : INT = 5 £
+    Let S : STRING = «dedf» £
+    Let F : FLOAT = 5.2 £
+    Let F2 : FLOAT = 532.2 £
+    Let C : CHAR = 'd' £
+BEGIN
+    //ferfge
+    regre
+    gerrg//
+    Z[5]=X £
+    Z[X]=D£
+    Z[X]£
+    X = (5) £
+    X = (5) / 0 £
+    Z£
+    L = 5 + Z - L * (Z / X)+
+    Z - D £
+    Z - (-200.5) + (D = 5) £
+    D = «FEFPK»£
+    D = 'f'£
+    IF(D<<Z):{
+        X = 5 + 8 £
+        IF(D<<Z):{
+            X = 5 + 8 £
+            RETURN (D)
+        }
+        ELSE :{
+            X = 5 + 4 £
+            RETURN (Z)
+        }
+        END_IF
+        RETURN (D=5)
+    }
+    ELSE :{
+        X = 5 + 4 £
+        RETURN (Z)
+    }
+    END_IF
+    FOR (X : 1 : X==100)
+        Z= D+Z£
+    END_FOR
+    GET(«%» : @ Z)£
+    SHOW(«Z: %» : Z)£
+
+END

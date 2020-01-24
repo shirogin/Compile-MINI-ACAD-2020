@@ -1,0 +1,27 @@
+PROGRAM Nom
+BEGIN
+var X || Y : INT £
+var X || Y : FLOAT £
+Let X INT = 15.2 £
+[STRING]
+X + Y £
+GET(«X» : @Id)
+X >> Y £
+X = «gr» £
+Y = 'f'
+[51]
+FOR()
+    X = 20£
+    X == 20
+END_FOR
+IF():
+{
+    Fefezzez
+}
+Kd << 54
+//fezjfi 
+fgen/
+ot//
+
+// fzefezf//
+END
