@@ -1,5 +1,5 @@
 %{
-    #include "Lexical.h"
+    #include "Lexical/Lexical.h"
     #include "syntax.tab.h"
     char str1[200];
     int size;

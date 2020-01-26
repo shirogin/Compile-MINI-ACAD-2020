@@ -1,5 +1,5 @@
 %{
-    #include "SYM.h"
+    #include "Syntaxic/Syntaxic.h"
     int yylex();
     int yyerror(char* msg); 
     FILE *yyin;

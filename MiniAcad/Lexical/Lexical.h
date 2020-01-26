@@ -1,4 +1,4 @@
-#include "Main.h"
+#include "../Main.h"
 //OUT put FILE
     FILE *F;
 // Input Details
@@ -10,6 +10,6 @@
     element *listIDF = NULL, //IDF list
         *listCONST=NULL;/* CONST list*/
     List *listComments = NULL /* COMMENTS*/;
-#include "Lexical/LexicalF.h"
-#include "Lexical/element.h"
-#include "Lexical/List.h"
+#include "LexicalF.h"
+#include "element.h"
+#include "List.h"
