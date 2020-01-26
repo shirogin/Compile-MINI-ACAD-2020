@@ -29,8 +29,9 @@ List * Postfix(List *expression){
     List *operators=NULL;
     while (checker!=NULL)
     {
+        printf("1\n");
         if(strlen(checker->val)>1){
-            Pushf(&postfix,"dd");
+            Pushf(&postfix,checker->val);
         }else
         {
             switch (checker->val[0])
@@ -41,8 +42,11 @@ List * Postfix(List *expression){
                 case '/':
                 case '*':
                     // oper
-                    if(Value(checker->val)<=Value(GetVal(operators)))
-                        
+                    if(operators!=NULL && !isEmpty(operators)){
+                        if(Value(checker->val) <= Value(GetVal(operators)) )
+                            Pushf(&expression,Pop(&operators));
+                    }
+                    Push(&operators,checker->val);
                     break;
                 case '(':
                     //open
@@ -50,32 +54,49 @@ List * Postfix(List *expression){
                     break;
                 case ')':
                     //close
-                    while (!isEmpty(operators))
+                    if(operators!=NULL)
+                    while (!isEmpty(operators) && (GetVal(operators)[0]!='('))
                     {
-
+                        Pushf(&postfix,Pop(&operators));
                     }
-                    
+                    Pop(&operators);
                     break;
                 case 'm':
-                    Push(&postfix,"m");
+                    Pushf(&postfix,"m");
                     break;
                 default:
                     //error
+                    Pushf(&postfix,checker->val);
                     break;
             }
-        }
-        
+        }  
         checker=checker->next;
     }
     
+    while (operators!=NULL && (!isEmpty(operators)))
+    {
+        Pushf(&postfix,Pop(&operators));
+    }
+    
+    return postfix;
 }
 int main(){
     Pushf(&Expression,"A");
     Pushf(&Expression,"=");
-    Pushf(&Expression,"A");
+    Pushf(&Expression,"B");
     Pushf(&Expression,"+");
     Pushf(&Expression,"C");
+    Pushf(&Expression,"*");
+    Pushf(&Expression,"C");
+    Pushf(&Expression,"-");
+    Pushf(&Expression,"D");
+    Pushf(&Expression,"*");
+    Pushf(&Expression,"10");
     PrintL(Expression);
-    printf("work \n");
+    printf("\n");
+    List *postfix=Postfix(Expression);
+    PrintL(postfix);
+    printf("\n");
+
     return 0;
 }
