@@ -1,6 +1,7 @@
 PROGRAM Nom
     var X : INT £
     var Z || Y : FLOAT £
+    ////
     var L || K [20] : [INT] £
     Let D : INT = 5 £
     Let S : STRING =  «dedf»£

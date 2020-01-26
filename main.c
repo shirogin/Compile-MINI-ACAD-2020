@@ -2,7 +2,26 @@ char *yytext;
 #include "./MiniAcad/Lexical/Lexical.h"
 List * Expression=NULL;
 
-
+short Value(char *x){
+    switch (x[0])
+    {
+    case '=':
+        return 0;
+        break;
+    case '+':
+    case '-':
+        return 1;
+    case '*':
+    case '/':
+        return 2;
+    case '(':
+    case ')':
+        return 3;
+    default:
+        return 0;
+        break;
+    }
+}
 
 List * Postfix(List *expression){
     List *postfix =NULL;
@@ -16,21 +35,29 @@ List * Postfix(List *expression){
         {
             switch (checker->val[0])
             {
+                case '=':
                 case '+':
                 case '-':
                 case '/':
                 case '*':
                     // oper
-                    if(checker->val[0])
+                    if(Value(checker->val)<=Value(GetVal(operators)))
+                        
                     break;
                 case '(':
                     //open
+                    Push(&operators,"(");
                     break;
                 case ')':
                     //close
+                    while (!isEmpty(operators))
+                    {
+
+                    }
+                    
                     break;
                 case 'm':
-
+                    Push(&postfix,"m");
                     break;
                 default:
                     //error
