@@ -1,5 +1,3 @@
-#include "OurString.h"
-#include "StringList2.h"
 
 
 void AssignType(element *head,short Type,int Asize);
@@ -14,11 +12,13 @@ void push_elem(element **head, char name[])
     else
         *head=new_node;
 }
-void pushELEM(element **head, char name[],short type){
+void pushELEM(element **head, char name[],short type)
+{
     push_elem(head,name);
     (*head)->type=type;
 }
-void printVALUES(DATA VAL,short type,int size){
+void printVALUES(DATA VAL,short type,int size)
+{
     if(size==0){
         switch (type)
         {
@@ -110,8 +110,6 @@ element* search_elem(element *head, char name[])
     }
     return NULL;
 }
-void SementicError(char *s);
-void AllocateData(element *head,int size);
 void AssignType(element *head,short Type,int Asize){
     if(head!=NULL){
         head->type=Type;
@@ -140,25 +138,29 @@ void AllocateData(element *head,int size){
         break;
     }
 }
-void ChangeValueINT(element *head,int val,int Asize){
+void ChangeValueINT(element *head,int val,int Asize)
+{
     if((head!=NULL) && (head->size!=0) && (head->type==0) ){
         *(head->val.INT+Asize)=val;
     }else
         SementicError("Variable couldn't be Changed");
 }
-void ChangeValueFLOAT(element *head,float val,int Asize){
+void ChangeValueFLOAT(element *head,float val,int Asize)
+{
     if((head!=NULL) && (head->size!=0) && (head->type==1)){
         *(head->val.FLOAT+Asize)=val;
     }else
         SementicError("Variable couldn't be declared");
 }
-void ChangeValueCHAR(element *head,char val,int Asize){
+void ChangeValueCHAR(element *head,char val,int Asize)
+{
     if((head!=NULL) && (head->size!=0) && (head->type==2)){
         *(head->val.CHAR+Asize)=val;
     }else
         SementicError("Variable couldn't be declared");
 }
-void ChangeValueSTRING(element *head,char *val,int Asize){
+void ChangeValueSTRING(element *head,char *val,int Asize)
+{
     if((head!=NULL) && (head->size!=0) && (head->type==3)){
         *(head->val.STRING+Asize)=val;
     }else

@@ -1,5 +1,5 @@
-#include "QUAD.h"
-void show(char *STRING,char *IDF,int index){
+void show(char *STRING,char *IDF,int index)
+{
     element* el=search_IDF(IDF);
     if(el==NULL){
         SementicError("error show");
@@ -35,7 +35,8 @@ void show(char *STRING,char *IDF,int index){
     }
     printf("\n");
 }
-void get(char *STRING,char *IDF,int index){
+void get(char *STRING,char *IDF,int index)
+{
     element* el=search_IDF(IDF);
     if(el==NULL){
         SementicError("error show");

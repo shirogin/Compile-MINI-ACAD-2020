@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "quad.h": "c",
+        "stringlist2.h": "c"
+    }
+}

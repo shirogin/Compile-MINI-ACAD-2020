@@ -503,7 +503,7 @@ char *yytext;
 #line 1 "project.l"
 #define INITIAL 0
 #line 2 "project.l"
-    #include "header.h"
+    #include "Lexical.h"
     #include "syntax.tab.h"
     char str1[200];
     int size;

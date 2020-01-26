@@ -91,16 +91,16 @@ FIRSTVAR: IDF IDFList{
 TypeDECLARATION: SIZE TWOP TYPE{
     printf("array type is %d[%d]\n",$3,$1);
     // pop all idf and made them of this type with this size $1
-    while(isEmpty(*IDFLIScT)==0){
-        element *current=search_IDF(Pop(IDFLIScT));
+    while(isEmpty(IDFLIScT)==0){
+        element *current=search_IDF(Pop(&IDFLIScT));
         if(current!=NULL)
             AssignType(current,$3,$1);
     }
 }
     | TWOP TYPE{
         printf("type is %d\n",$2);
-        while(isEmpty(*IDFLIScT)==0){
-        element *current=search_IDF(Pop(IDFLIScT));
+        while(isEmpty(IDFLIScT)==0){
+        element *current=search_IDF(Pop(&IDFLIScT));
         if(current!=NULL)
             AssignType(current,$2,1);
         }
@@ -187,8 +187,8 @@ DOIDF: IDF{
 IDFINSTRACTION: IDFI EXPRESSIONA EOI{
     //quad the instraction list
         Print(EXPRESSIONList);
-        while(isEmpty(*EXPRESSIONList)==0){
-            Pop(EXPRESSIONList);
+        while(isEmpty(EXPRESSIONList)==0){
+            Pop(&EXPRESSIONList);
         }
     };
 EXPRESSIONA: EXPRESSION
@@ -221,8 +221,8 @@ MSIGN: ADD{
     };
 CONDITION: EXPRESSIONSP DOLOGIC_OP EXPRESSIONSP{
     Print(EXPRESSIONList);
-    while(isEmpty(*EXPRESSIONList)==0){
-        Pop(EXPRESSIONList);
+    while(isEmpty(EXPRESSIONList)==0){
+        Pop(&EXPRESSIONList);
     }
 };
 DOLOGIC_OP: LOGIC_OP{

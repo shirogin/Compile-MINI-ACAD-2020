@@ -1,23 +1,36 @@
-#include "StringList.h"
-int colom = 1, 
-    ligne = 1,
-    Decalaration = 1;
-char *Line;
 
-
-// Returns new Line
-void newLine()
+char *adapt(char tab[])
 {
+    char *s = (char *)malloc(sizeof(char) * strlen(tab));
+    strcpy(s, tab);
+    return s;
+}
+
+int nTol(char *s, int *line, int *col)
+{
+    int l = strlen(s), count = 0;
+    for (int i = 0; i < l; i++)
+    {
+        if (s[i] == '\n')
+        {
+            (*line)++;
+            fprintf(F,"\n%d-\t", *line);
+            s[i] = '\t';
+            *col = 1;
+        }
+        else
+            fprintf(F,"%c", s[i]);
+    }
+    return count;
+}
+void newLine(){
     ligne++;
     colom = 1;
     fprintf(F,"\n%d-\t", ligne);
     free(Line);
     Line=NULL;
 }
-// Declare variables
-element *listIDF = NULL,
-    *listCONST=NULL;/* IDF and CONST*/
-List *listComments = NULL /* COMMENTS*/;
+
 element* search_IDF(char name[]){
     return search_elem(listIDF,name);
 }
@@ -66,7 +79,6 @@ void AssignConst(char *name,short Type,char *val){
         EVALUE(node,val,0);
     }
 }
-void print_TS();
 void SementicError(char *s){
     printf("\033[1;33mSementic Error in line %d  colom %d : %s \n\033[0m",ligne,colom-strlen(yytext),s);
     print_TS();

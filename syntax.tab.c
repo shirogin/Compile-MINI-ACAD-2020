@@ -1568,8 +1568,8 @@ yyreduce:
     {
     printf("array type is %d[%d]\n",(yyvsp[(3) - (3)].myINT),(yyvsp[(1) - (3)].myINT));
     // pop all idf and made them of this type with this size $1
-    while(isEmpty(*IDFLIScT)==0){
-        element *current=search_IDF(Pop(IDFLIScT));
+    while(isEmpty(IDFLIScT)==0){
+        element *current=search_IDF(Pop(&IDFLIScT));
         if(current!=NULL)
             AssignType(current,(yyvsp[(3) - (3)].myINT),(yyvsp[(1) - (3)].myINT));
     }
@@ -1582,8 +1582,8 @@ yyreduce:
 #line 100 "syntax.y"
     {
         printf("type is %d\n",(yyvsp[(2) - (2)].myINT));
-        while(isEmpty(*IDFLIScT)==0){
-        element *current=search_IDF(Pop(IDFLIScT));
+        while(isEmpty(IDFLIScT)==0){
+        element *current=search_IDF(Pop(&IDFLIScT));
         if(current!=NULL)
             AssignType(current,(yyvsp[(2) - (2)].myINT),1);
         }
@@ -1749,8 +1749,8 @@ yyreduce:
     {
     //quad the instraction list
         Print(EXPRESSIONList);
-        while(isEmpty(*EXPRESSIONList)==0){
-            Pop(EXPRESSIONList);
+        while(isEmpty(EXPRESSIONList)==0){
+            Pop(&EXPRESSIONList);
         }
     ;}
     break;
@@ -1829,8 +1829,8 @@ yyreduce:
 #line 222 "syntax.y"
     {
     Print(EXPRESSIONList);
-    while(isEmpty(*EXPRESSIONList)==0){
-        Pop(EXPRESSIONList);
+    while(isEmpty(EXPRESSIONList)==0){
+        Pop(&EXPRESSIONList);
     }
 ;}
     break;

@@ -1,9 +1,3 @@
-#include "element.h"
-/* ----------------------------------------------------------------------------------------------------- */
-        #define  printType "%s "
-/* ----------------------------------------------------------------------------------------------------- */
-
-
 void Init(List *list){
     list->Head=NULL;
     list->Tail=NULL;
@@ -29,7 +23,7 @@ void Push(List **list,type VAL){
     (*list)->Head=newN;
 }
 void Pushf(List **list,type VAL){
-    Noed *next=CreatNoed(VAL,NULL);
+    Noed *next= CreatNoed(VAL,NULL);
     if(*list==NULL){
         *list=(List*)malloc(sizeof(list));
         Init((*list));
@@ -40,20 +34,20 @@ void Pushf(List **list,type VAL){
         (*list)->Head=next;
     (*list)->Tail=next;
 }
-type Pop(List *list){
-    Noed *tmp=list->Head;
-    list->Head=tmp->next;
-    if(list->Head==NULL)
-        list->Tail=NULL;
+type Pop(List **list){
+    Noed *tmp=(*list)->Head;
+    (*list)->Head=tmp->next;
+    if((*list)->Head==NULL)
+        (*list)->Tail=NULL;
     type val=tmp->val;
     free(tmp);
     return val;
 }
-type GetVal(List list){
-    return list.Head->val;
+type GetVal(List *list){
+    return list->Head->val;
 }
-int isEmpty(List list){
-    if(list.Head==NULL)
+int isEmpty(List *list){
+    if(list->Head==NULL)
         return 1;
     return 0;
 }
