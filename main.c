@@ -1,6 +1,8 @@
-
-#include "QUAD.h"
+char *yytext;
+#include "./MiniAcad/Lexical/Lexical.h"
+List * Expression=NULL;
 int main(){
-    printf("lfd");
-    return 1;
+    
+    printf("work\n");
+    return 0;
 }
