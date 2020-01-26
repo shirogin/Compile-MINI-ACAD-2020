@@ -228,17 +228,19 @@ CONDITION: EXPRESSIONSP DOLOGIC_OP EXPRESSIONSP{
 DOLOGIC_OP: LOGIC_OP{
     Pushf(&EXPRESSIONList,$1);
 };
-INDEX: {strcpy($$,"0");}| SIZE{
+INDEX: {        
+    Pushf(&EXPRESSIONList,"[0]");
+}
+    | SIZE{
         sprintf($$,"[%d]",$1);
-        printf("%s",$$);
         Pushf(&EXPRESSIONList,$$);
     }
-    | OPENBRACK IDF CLOSEBRACK{
-        //check idf if its int;
-        char s[1000];
-        sprintf(s,"[%s]",$2);
-        Pushf(&EXPRESSIONList,s);
+    | DoOPENBRACK IDFI CLOSEBRACK{
+        Pushf(&EXPRESSIONList,"]");
     };
+DoOPENBRACK: OPENBRACK{
+        Pushf(&EXPRESSIONList,"[");
+}
 VALUE: INTEGER 
     | FLOAT
     | CHAR

@@ -3,10 +3,10 @@ PROGRAM Nom
     var Z || Y : FLOAT £
     var L || K [20] : [INT] £
     Let D : INT = 5 £
-    Let S : STRING = «dedf» £
+    Let S : STRING =  «dedf»£
     Let F : FLOAT = 5.2 £
     Let F2 : FLOAT = 532.2 £
-    Let C : CHAR = 'd' £
+    Let C : STRING = «dedf»  £
 BEGIN
     //ferfge
     regre
@@ -43,7 +43,7 @@ BEGIN
     FOR (X : 1 : X==100)
         Z= D+Z£
     END_FOR
-    GET(«%» : @ Z)£
+    //GET(«%» : @ Z)//£//
     SHOW(«Z: %» : Z)£
 
 END
