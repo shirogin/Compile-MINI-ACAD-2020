@@ -12,43 +12,42 @@
 12-	    | A Comment : //ferfge
 13-	    regre
 14-	    gerrg//
-15-	    | IDF : Z | SIZE : [5] | AFFECT : = | IDF : X  | EOI : £ Z [5] = X [0] 
-16-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | AFFECT : = | IDF : D | EOI : £ Z [ X [0] ] = D [0] 
-17-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | EOI : £ Z [ X [0] ] 
-18-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | EOI : £ X [0] = ( 5 ) 
-19-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | ARTH_OP : /  | INTEGER : 0  | EOI : £ X [0] = ( 5 ) / 0 
-20-	    | IDF : Z | EOI : £ Z [0] 
+15-	    | IDF : Z | SIZE : [5] | AFFECT : = | IDF : X  | EOI : £ Z[5] = X 
+16-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | AFFECT : = | IDF : D | EOI : £ X Z[X] = D 
+17-	    | IDF : Z | SEPRATOR : [ | IDF : X | SEPRATOR : ] | EOI : £ X Z[X] 
+18-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | EOI : £ X = ( 5 ) 
+19-	    | IDF : X  | AFFECT : =  | SEPRATOR : ( | INTEGER : 5 | SEPRATOR : )  | ARTH_OP : /  | INTEGER : 0  | EOI : £ X = ( 5 ) / 0 
+20-	    | IDF : Z | EOI : £ Z 
 21-	    | IDF : L  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | IDF : Z  | ARTH_OP : -  | IDF : L  | ARTH_OP : *  | SEPRATOR : ( | IDF : Z  | ARTH_OP : /  | IDF : X | SEPRATOR : ) | ARTH_OP : + 
-22-	    | IDF : Z  | ARTH_OP : -  | IDF : D  | EOI : £ L [0] = 5 + Z [0] - L [0] * ( Z [0] / X [0] ) + Z [0] - D [0] 
-23-	    | IDF : Z  | ARTH_OP : -  | FLOAT : -200.5  | ARTH_OP : +  | SEPRATOR : ( | IDF : D  | AFFECT : =  | INTEGER : 5 | SEPRATOR : )  | EOI : £ Z [0] - -200.5 + ( D [0] = 5 ) 
-24-	    | IDF : D  | AFFECT : =  | STRING : «FEFPK» | EOI : £ D [0] = FEFPK 
-25-	    | IDF : D  | AFFECT : =  | CHAR : 'f' | EOI : £ D [0] = f 
-26-	    | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D [0] << Z [0] | SEPRATOR : : | SEPRATOR : { 
-27-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X [0] = 5 + 8 
-28-	        | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D [0] << Z [0] | SEPRATOR : : | SEPRATOR : { 
-29-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X [0] = 5 + 8 
+22-	    | IDF : Z | SIZE : [5]  | ARTH_OP : -  | IDF : D  | EOI : £ L = 5 + Z - L * ( Z / X ) + Z[5] - D 
+23-	    | IDF : Z  | ARTH_OP : -  | FLOAT : -200.5  | ARTH_OP : +  | SEPRATOR : ( | IDF : D  | ARTH_OP : *  | INTEGER : 5 | SEPRATOR : )  | EOI : £ Z - -200.5 + ( D * 5 ) 
+24-	    | IDF : D  | AFFECT : =  | STRING : «FEFPK» | EOI : £ D = FEFPK 
+25-	    | IDF : D  | AFFECT : =  | CHAR : 'f' | EOI : £ D = f 
+26-	    | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D << Z | SEPRATOR : : | SEPRATOR : { 
+27-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X = 5 + 8 
+28-	        | KEYWORD : IF | SEPRATOR : ( | IDF : D | LOGIC_OP : << | IDF : Z | SEPRATOR : ) D << Z | SEPRATOR : : | SEPRATOR : { 
+29-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 8  | EOI : £ X = 5 + 8 
 30-	            | KEYWORD : RETURN  | SEPRATOR : ( | IDF : D | SEPRATOR : ) 
 31-	        | SEPRATOR : } 
 32-	        | KEYWORD : ELSE  | SEPRATOR : : | SEPRATOR : { 
-33-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ D [0] X [0] = 5 + 4 
+33-	            | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ D X = 5 + 4 
 34-	            | KEYWORD : RETURN  | SEPRATOR : ( | IDF : Z | SEPRATOR : ) 
 35-	        | SEPRATOR : } 
 36-	        | KEYWORD : END_IF 
-37-	        | KEYWORD : RETURN  | SEPRATOR : ( | IDF : D | AFFECT : = | INTEGER : 5 | SEPRATOR : ) 
+37-	        | KEYWORD : RETURN  | SEPRATOR : ( | IDF : D | ARTH_OP : / | INTEGER : 5 | SEPRATOR : ) 
 38-	    | SEPRATOR : } 
 39-	    | KEYWORD : ELSE  | SEPRATOR : : | SEPRATOR : { 
-40-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ Z [0] D [0] = 5 X [0] = 5 + 4 
+40-	        | IDF : X  | AFFECT : =  | INTEGER : 5  | ARTH_OP : +  | INTEGER : 4  | EOI : £ Z D / 5 X = 5 + 4 
 41-	        | KEYWORD : RETURN  | SEPRATOR : ( | IDF : Z | SEPRATOR : ) 
 42-	    | SEPRATOR : } 
 43-	    | KEYWORD : END_IF 
-44-	    | KEYWORD : FOR  | SEPRATOR : ( | IDF : X  | SEPRATOR : :  | INTEGER : 1  | SEPRATOR : :  | IDF : X | LOGIC_OP : == | INTEGER : 100 | SEPRATOR : ) Z [0] [0] X [0] == 100 
-45-	        | IDF : Z | AFFECT : =  | IDF : D | ARTH_OP : + | IDF : Z | EOI : £ Z [0] = D [0] + Z [0] 
+44-	    | KEYWORD : FOR  | SEPRATOR : ( | IDF : X  | SEPRATOR : :  | INTEGER : 1  | SEPRATOR : :  | IDF : X | LOGIC_OP : == | INTEGER : 100 | SEPRATOR : ) Z X == 100 
+45-	        | IDF : Z | AFFECT : =  | IDF : D | ARTH_OP : + | IDF : Z | EOI : £ Z = D + Z 
 46-	    | KEYWORD : END_FOR 
 47-	    | A Comment : //GET(«%» : @ Z)//£//
 48-	    | KEYWORD : SHOW | SEPRATOR : ( | STRING : «Z: %»  | SEPRATOR : :  | IDF : Z | SEPRATOR : ) | EOI : £ 
 49-	
 50-	| KEYWORD : END 
-51-	| IDF : A 
 ------------------ IDF Table ------------------
 Entity: C  -  Type: STRING  -  Value: dedf CONST
 Entity: F2  -  Type: FLOAT  -  Value: 532.200012 CONST

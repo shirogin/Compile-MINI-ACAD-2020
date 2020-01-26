@@ -25,7 +25,7 @@ IDF {lettreM}({lettrem}|{Digit}){0,7}
 ARTH_OP [+-/*]
 LOGIC_OP (<<)|(>>)|(<<>>)|(<<=)|(>>=)|(==)
 NL (\r\n)|(\n)
-COMMENTS ("//"(([^/]|\n)|("/"([^/]+|\n)))*"//")|("//".*)
+COMMENTS ("//"(([^/]|\n)|("/"([^/]+|\n)))*"//")|("//".+"//")
 SIZE "["{Digit}+"]"
 ErrI ({letter}|{Digit})+
 ErrCh (\'.+\')|('')

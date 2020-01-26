@@ -19,8 +19,8 @@ BEGIN
     X = (5) / 0 £
     Z£
     L = 5 + Z - L * (Z / X)+
-    Z - D £
-    Z - (-200.5) + (D = 5) £
+    Z[5] - D £
+    Z - (-200.5) + (D * 5) £
     D = «FEFPK»£
     D = 'f'£
     IF(D<<Z):{
@@ -34,7 +34,7 @@ BEGIN
             RETURN (Z)
         }
         END_IF
-        RETURN (D=5)
+        RETURN (D/5)
     }
     ELSE :{
         X = 5 + 4 £
@@ -48,13 +48,3 @@ BEGIN
     SHOW(«Z: %» : Z)£
 
 END
-A=D-C*5;
-ADC5*-=
-=-*
-
-A=C*D-X;
-ACD*X-=
-
-A=C*D/5;
-ACD*
-=/
