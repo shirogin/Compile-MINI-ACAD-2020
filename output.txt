@@ -43,11 +43,11 @@
 43-	    | KEYWORD : FOR  | SEPRATOR : ( | IDF : X  | SEPRATOR : :  | INTEGER : 1  | SEPRATOR : :  | IDF : X | LOGIC_OP : == | INTEGER : 100 | SEPRATOR : ) Z [0] [0] X [0] == 100 
 44-	        | IDF : Z | AFFECT : =  | IDF : D | ARTH_OP : + | IDF : Z | EOI : £ Z [0] = D [0] + Z [0] 
 45-	    | KEYWORD : END_FOR 
-46-	    |    Lexical Error Error in Comments : ligne 46 colom 5 : //GET(«%» : @ Z)//£// 
-
+46-	    | A Comment : //GET(«%» : @ Z)//£//
 47-	    | KEYWORD : SHOW | SEPRATOR : ( | STRING : «Z: %»  | SEPRATOR : :  | IDF : Z | SEPRATOR : ) | EOI : £ 
 48-	
 49-	| KEYWORD : END 
+50-	
 ------------------ IDF Table ------------------
 Entity: C  -  Type: STRING  -  Value: dedf CONST
 Entity: F2  -  Type: FLOAT  -  Value: 532.200012 CONST
@@ -62,4 +62,4 @@ Entity: X  -  Type: INT  -  Value: [ 0 ]
 Entity: Nom  -  Type: INT  -  Value: 0 CONST
 
 ------------------ Comments Table ------------------
-//ferfge	    regre	    gerrg// 
+//ferfge	    regre	    gerrg// //GET(«%» : @ Z)//£// 

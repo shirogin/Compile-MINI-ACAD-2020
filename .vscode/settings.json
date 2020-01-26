@@ -4,6 +4,7 @@
         "quad.h": "c",
         "stringlist2.h": "c",
         "main.h": "c",
-        "lexical.h": "c"
+        "lexical.h": "c",
+        "list.h": "c"
     }
 }

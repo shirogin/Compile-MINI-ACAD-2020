@@ -25,22 +25,13 @@ IDF {lettreM}({lettrem}|{Digit}){0,7}
 ARTH_OP [+-/*]
 LOGIC_OP (<<)|(>>)|(<<>>)|(<<=)|(>>=)|(==)
 NL (\r\n)|(\n)
-COMMENTS "//"(([^/]|\n)|("/"([^/]+|\n)))*"//"
+COMMENTS ("//"(([^/]|\n)|("/"([^/]+|\n)))*"//")|("//".+"//")
 SIZE "["{Digit}+"]"
 ErrI ({letter}|{Digit})+
 ErrCh (\'.+\')|('')
 ErrS «([^»]|{NL})*»?
 ErrC ("//".+)
 ErrU (.)
-/* Tabels
-    * 0- IDF
-    * 1- Keyword
-    * 2- Separators
-    * 3- Logical Operator
-    * 4- Arithmitic Operator
-    * 5- Types
-    * 6- Constants
-*/
 %%
 {COMMENTS} {
     Comment(yytext);

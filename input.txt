@@ -47,3 +47,13 @@ BEGIN
     SHOW(«Z: %» : Z)£
 
 END
+A=D-C*5;
+ADC5*-=
+=-*
+
+A=C*D-X;
+ACD*X-=
+
+A=C*D/5;
+ACD*
+=/
