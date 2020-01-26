@@ -41,7 +41,7 @@ typedef struct element_t
     type GetVal(List *list);
     int isEmpty(List *list);
     void Print(List *list);
-
+    void PrintL(List *list);
 //IDF Functions 
     element* search_IDF(char name[]);
     element* search_CONST(char name[]);

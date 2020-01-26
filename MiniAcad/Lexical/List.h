@@ -56,6 +56,16 @@ void Print(List *list){
         Noed *head=list->Head;
         while (head!=NULL)
         {
+            fprintf(F,printType,head->val);
+            head=head->next;
+        }
+    }
+}
+void PrintL(List *list){
+    if(list!=NULL){
+        Noed *head=list->Head;
+        while (head!=NULL)
+        {
             printf(printType,head->val);
             head=head->next;
         }

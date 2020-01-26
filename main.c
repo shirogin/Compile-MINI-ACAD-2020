@@ -8,6 +8,6 @@ int main(){
     Pushf(&Expression,"+");
     Pushf(&Expression,"C");
     printf("work %s\n",Expression->Head->val);
-    Print(Expression);
+    PrintL(Expression);
     return 0;
 }
