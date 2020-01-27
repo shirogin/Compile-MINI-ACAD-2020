@@ -55,7 +55,18 @@ void append_qdr(qdr **head, char oper[], char op1[], char op2[], char res[])
     new_node->next = *head;
     *head = new_node;
 }
-
+void AddQdr(qdr **Head,qdr *added){
+    qdr *tmp=(*Head);
+    if(tmp==NULL)
+        (*Head)=added;
+    else{
+        while (tmp->next!=NULL)
+        {
+            tmp=tmp->next;
+        }
+        tmp->next=added;
+    }
+}
 qdr* getNth_qdr(qdr *head, int position)
 {
     if (position > len_qdr(head) || position < 0){

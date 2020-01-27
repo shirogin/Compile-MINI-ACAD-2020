@@ -149,8 +149,9 @@ int isOP (char *c){
 
 qdr* qdrExpression(List *head){
     qdr *qdrs = NULL;
-    int i = 0;
     List *pile;
+    char res[10];
+
     while(!isEmpty(head)){
         char *c = GetVal(head);
         if (!isOP(c)){
@@ -158,18 +159,38 @@ qdr* qdrExpression(List *head){
             Push(&pile, c);
         }else{
             char *op = Pop(&head);
-            char *op1 = Pop(&pile);
-            char res[100];
-            sprintf(res, "t%d", i);
-            i++;
-            if (strcmp(op, "m") == 0){
-                Push(&pile, res);
-                push_qdr(&qdrs, "minus", op1, "", res);
-            }else{
-                char *op2 = Pop(&pile);
-                Push(&pile, res);
-                push_qdr(&qdrs, op, op1, op2, res);
+            char *op2 = Pop(&pile);
+            sprintf(res, "t%d", qumtem);
+            qumtem++;
+            switch(op[0]){
+                case 'm':  {
+                    Push(&pile, res);
+                    push_qdr(&qdrs, "minus", op2, "", res);
+                    break;
+                }
+                case '=': {
+                    qumtem--;
+                    char *op1 = Pop(&pile);
+                    push_qdr(&qdrs, op, op1, "", op2);
+                    break;
+                }
+                case '/':
+                    
+                default: {
+                    char *op1 = Pop(&pile);
+                    Push(&pile, res);
+                    push_qdr(&qdrs, op, op1, op2, res);
+                    break;
+                }
             }
+            // if (strcmp(op, "m") == 0){
+            //     Push(&pile, res);
+            //     push_qdr(&qdrs, "minus", op1, "", res);
+            // }else{
+            //     char *op2 = Pop(&pile);
+            //     Push(&pile, res);
+            //     push_qdr(&qdrs, op, op1, op2, res);
+            // }
         }
     }
     return qdrs;

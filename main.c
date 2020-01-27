@@ -77,19 +77,18 @@ List * Postfix(List *expression){
     
     return postfix;
 }
+//    Z - (-200.5) + (D * 5) £
+
 int main(){
-    Pushf(&Expression,"A");
-    Pushf(&Expression,"=");
-    Pushf(&Expression,"(");
-    Pushf(&Expression,"m");
-    Pushf(&Expression,"B");
-    Pushf(&Expression,"+");
-    Pushf(&Expression,"C");
-    Pushf(&Expression,")");
-    Pushf(&Expression,"*");
-    Pushf(&Expression,"C");
+    Pushf(&Expression,"Z");
     Pushf(&Expression,"-");
+    Pushf(&Expression,"(-200.5)");
+    Pushf(&Expression,"+");
+    Pushf(&Expression,"(");
     Pushf(&Expression,"D");
+    Pushf(&Expression,"*");
+    Pushf(&Expression,"5");
+    Pushf(&Expression,")");
 
 
     PrintL(Expression);
@@ -97,6 +96,5 @@ int main(){
     List *postfix=Postfix(Expression);
     PrintL(postfix);
     printf("\n");
-
     return 0;
 }

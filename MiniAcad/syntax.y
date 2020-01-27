@@ -173,12 +173,13 @@ IDFI: IDF INDEX{
 IDFINSTRACTION: IDFI TypeExp EOI{
     //quad the instraction list
         Print(EXPRESSIONList);
-        Postfix(EXPRESSIONList)
+        print_qdr(qdrExpression(Postfix(EXPRESSIONList)));
+        //AddQdr(&ListQdr,qdrExpression());
         while(isEmpty(EXPRESSIONList)==0){
             Pop(&EXPRESSIONList);
         }
     };
-TypeExp:  DOAFFECT EVALUE
+TypeExp: DOAFFECT EVALUE
     | ExpOP;
 ;
 EVALUE: NONVALUE TypeError{Pushf(&EXPRESSIONList,$1);}
@@ -261,6 +262,8 @@ int main(int argc, char *argv[]){
     printf("\n");
     print_TS();
     fclose(F);
+    print_qdr(ListQdr);
+
     return 0;
 }
 

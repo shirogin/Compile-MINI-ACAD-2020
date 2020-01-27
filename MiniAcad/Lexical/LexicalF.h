@@ -129,6 +129,7 @@ void print_TS()
     fprintf(F,"\n------------------ IDF Table ------------------\n");
     print_elem(listIDF);
 
+
     fprintf(F,"\n------------------ Comments Table ------------------\n");
     Print(listComments);
 
