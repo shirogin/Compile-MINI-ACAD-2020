@@ -173,8 +173,10 @@ IDFI: IDF INDEX{
 IDFINSTRACTION: IDFI TypeExp EOI{
     //quad the instraction list
         Print(EXPRESSIONList);
-        print_qdr(qdrExpression(Postfix(EXPRESSIONList)));
-        //AddQdr(&ListQdr,qdrExpression());
+        qdr *tmp=qdrExpression(Postfix(EXPRESSIONList));
+        print_qdr(tmp);
+
+        AddQdr(&ListQdr,tmp);
         while(isEmpty(EXPRESSIONList)==0){
             Pop(&EXPRESSIONList);
         }

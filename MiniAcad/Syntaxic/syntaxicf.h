@@ -144,7 +144,8 @@ List * Postfix(List *expression){
     return postfix;
 }
 int isOP (char *c){
-    return ( c[0]=='=' || c[0]=='+' || c[0]=='-' || c[0]=='*' || c[0]=='/' || c[0]=='m' );
+        return (strcmp(c, "=" ) == 0 || strcmp(c, "+" ) == 0 || strcmp(c, "-" ) == 0 || strcmp(c, "*" )== 0 || strcmp(c, "/" ) == 0 || strcmp(c, "m" ) == 0);
+
 }
 
 qdr* qdrExpression(List *head){
@@ -175,7 +176,10 @@ qdr* qdrExpression(List *head){
                     break;
                 }
                 case '/':
-                    
+                    if(search_elem(listIDF,op2)==NULL && atof(op2)==0){
+                        printf("\033[1;33mSementic Error in line %d  colom %d : %s \n\033[0m",ligne,colom-strlen(yytext),"Devision by 0");
+                        exit(-1);
+                    }
                 default: {
                     char *op1 = Pop(&pile);
                     Push(&pile, res);
@@ -183,14 +187,6 @@ qdr* qdrExpression(List *head){
                     break;
                 }
             }
-            // if (strcmp(op, "m") == 0){
-            //     Push(&pile, res);
-            //     push_qdr(&qdrs, "minus", op1, "", res);
-            // }else{
-            //     char *op2 = Pop(&pile);
-            //     Push(&pile, res);
-            //     push_qdr(&qdrs, op, op1, op2, res);
-            // }
         }
     }
     return qdrs;

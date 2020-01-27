@@ -1,8 +1,8 @@
 #include "../Main.h"
 int qumtem = 0;
+extern element *listIDF;
 
-#include "QUAD.h"
-#include "syntaxicf.h"
+
 int yylex();
 int yyerror(char* msg); 
 FILE *yyin;
@@ -18,6 +18,7 @@ List *IDFLIScT=NULL,
 short getType(char name[]);
 char ELSEetique[100],ENDIFetique[100],FORetique[100],ENDFORetique[100];
 int ELSEetiqueI=0,ELSEetiqueC,ENDIFetiqueC,ENDIFetiqueI=0,FORetiqueI=0,ENDFORetiqueI=0,FORetiqueC,ENDFORetiqueC;
-
+#include "QUAD.h"
+#include "syntaxicf.h"
 //List Quadriple
 qdr *ListQdr=NULL;
