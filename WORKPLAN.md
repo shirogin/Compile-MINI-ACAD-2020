@@ -5,7 +5,7 @@
 table | id
 ----|---
 IDF | 0
-infix | 1
+Values | 1
 Comments | 2
 
 ### **<span style="color:purple;">DECLARATION Types</span>**
@@ -33,26 +33,16 @@ ARRAY |  1 < size
     else if(!exist)
         error("this var isn't declared")
 
-## START AND NEXT TABLE OF THE LANGUAGE GRAMMAR
-### ONE
+### Files Created 
 
-|                 	|                       Debut                      	| Suivant 	|
-|:---------------:	|:------------------------------------------------:	|:-------:	|
-|       prog      	|                      PROGRAM                     	|         	|
-|   DECLARATION   	|                    var, Let, ε                   	|         	|
-| TypeDECLARATION 	|                    SIZE, TWOP                    	|         	|
-|       TYPE      	|            INT, FLOATT, CHART, STRINGT           	|         	|
-|     IDFList     	|                      IDFS, ε                     	|         	|
-|     ELSECASE    	|                      ELSE, ε                     	|         	|
-|   INSTRACTION   	|            IDF, IF, FOR, SHOW, SHOW, ε           	|         	|
-|    CONDITION    	|                  deb(EXPRESSION)                 	|         	|
-|      INDEX      	|                      SIZE, ε                     	|         	|
-|    EXPRESSION   	| deb(SIGN), deb(EXPRESSION), deb(VALUE), OPENSEP  	|         	|
-|   EXPRESSIONO   	|               deb(VALUE), deb(SIGN)              	|         	|
-|   EXPRESSIONI   	|             AFFECT , deb(OPERATE), ε             	|         	|
-|     OPERATE     	|                   deb(ARTH_OP)                   	|         	|
-|      VALUE      	|          INTEGER , FLOAT, CHAR , STRING          	|         	|
-|       SIGN      	|                   SUB, ADD , ε                   	|         	|
-|     ARTH_OP     	|                SUB, ADD, MUL, DIV                	|         	|
+Files Name	|   size
+:----------:|:------:
+App.exe |	the program to compile the Input.txt
+Lexical.txt | lexical treatment + TS
+Quadriples.txt |  Quadriples list 
+DeclarationF.txt |  Var Declaration
+### Run your program 
+> lunch this command for windows : ./run.ps1
 
-### TWO
+> lunch this command for Linux : ./run.ps1
+
