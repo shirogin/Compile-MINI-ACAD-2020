@@ -1,6 +1,6 @@
 %{
     #include "Syntaxic/Syntaxic.h"
-    
+    FILE *DeclarationF;
 %}
 
 %token PROGRAM IDF SIZE BEGI END var Let AFFECT EOI ADDRESS
@@ -13,7 +13,7 @@
 
 %start prog
 
-%type <mySTRING> INDEX IDFI NVALUE NONVALUE LOGIC_OP SIGN STRING PROGRAM IDF BEGI END var Let AFFECT GET SHOW IF FOR RETURN ELSE END_IF END_FOR IDFS OPENSEP TWOP CLOSESEP OPENBRACK CLOSEBRACK OPENBRACE CLOSEBRACE VALUE FLOAT INTEGER CHAR ADD SUB MUL DIV
+%type <mySTRING> DoEXPRESSION INDEX IDFI NVALUE NONVALUE LOGIC_OP SIGN STRING PROGRAM IDF BEGI END var Let AFFECT GET SHOW IF FOR RETURN ELSE END_IF END_FOR IDFS OPENSEP TWOP CLOSESEP OPENBRACK CLOSEBRACK OPENBRACE CLOSEBRACE VALUE FLOAT INTEGER CHAR ADD SUB MUL DIV
 %type <myINT> SIZE TYPE 
 %type <myCHAR> EOI ADDRESS 
 
@@ -41,7 +41,7 @@ CONSTDECLARATION: Let IDF TWOP TYPE AFFECT VALUE EOI{
             }else{
                 AssignConst($2, $4, $6);
             }
-            printf("CONST %s=%s INT\n",$2,$6);
+            fprintf(DeclarationF,"CONST %s=%s INT\n",$2,$6);
             break;
         case 1:
             if($4!=getType($6)){
@@ -50,7 +50,7 @@ CONSTDECLARATION: Let IDF TWOP TYPE AFFECT VALUE EOI{
                 AssignConst($2, $4, $6);
                 
             }
-            printf("CONST %s=%s FLOAT\n",$2,$6);
+            fprintf(DeclarationF,"CONST %s=%s FLOAT\n",$2,$6);
             break;
         case 2:
             if($4!=getType($6)){
@@ -58,7 +58,7 @@ CONSTDECLARATION: Let IDF TWOP TYPE AFFECT VALUE EOI{
             }else{
                 AssignConst($2, $4, $6);
             }
-            printf("CONST %s=%s CHAR\n",$2,$6);
+            fprintf(DeclarationF,"CONST %s=%s CHAR\n",$2,$6);
             break;
         case 3:
             if($4!=getType($6)){
@@ -66,16 +66,16 @@ CONSTDECLARATION: Let IDF TWOP TYPE AFFECT VALUE EOI{
             }else{
                 AssignConst($2, $4, $6);
             }
-            printf("CONST %s=%s STRING\n",$2,$6);
+            fprintf(DeclarationF,"CONST %s=%s STRING\n",$2,$6);
             break;
     }
 };
 FIRSTVAR: IDF IDFList{
-    printf(" %s ",$1);
+    fprintf(DeclarationF," %s ",$1);
     Push(&IDFLIScT,$1);
 };
 TypeDECLARATION: SIZE TWOP TYPE{
-    printf("array type is %d[%d]\n",$3,$1);
+    fprintf(DeclarationF,"array type is %d[%d]\n",$3,$1);
     // pop all idf and made them of this type with this size $1
     while(isEmpty(IDFLIScT)==0){
         element *current=search_IDF(Pop(&IDFLIScT));
@@ -84,7 +84,7 @@ TypeDECLARATION: SIZE TWOP TYPE{
     }
 }
     | TWOP TYPE{
-        printf("type is %d\n",$2);
+        fprintf(DeclarationF,"type is %d\n",$2);
         while(isEmpty(IDFLIScT)==0){
         element *current=search_IDF(Pop(&IDFLIScT));
         if(current!=NULL)
@@ -95,12 +95,12 @@ TypeDECLARATION: SIZE TWOP TYPE{
     ;
 TYPE: ITYPE | FTYPE | STYPE | CTYPE;
 IDFList: | IDFS IDF IDFList{
-    printf(" %s ",$2);
+    fprintf(DeclarationF," %s ",$2);
     //push to idf list
     Push(&IDFLIScT,$2);
 
 };
-ELSECASE: | ELSE TWOP OPENBRACE INSTRACTION RETURN OPENSEP EXPRESSION CLOSESEP CLOSEBRACE;
+ELSECASE: | ELSE TWOP OPENBRACE INSTRACTION RETURNEXPRESSION CLOSEBRACE;
 INSTRACTION: | IDFINSTRACTION INSTRACTION
     | IFINSTRACTION INSTRACTION
     | FORINSTRACTION INSTRACTION
@@ -130,8 +130,9 @@ IFINSTRACTION: IF IFCONDITION TWOP IFEXPRESSION ENDIFEXPRESSION{
         //pop END_IFx
     };
 IFCONDITION:OPENSEP CONDITION CLOSESEP{
+    push_qdr(&ListQdr,"=","","result","Condition");
     sprintf(ELSEetique,"etique %d",ELSEetiqueI);
-    printf("condition then if with %s\n",ELSEetique);
+    push_qdr(&ListQdr,"BZ",ELSEetique,"Condition","");
     ELSEetiqueI++;
     ELSEetiqueC=ELSEetiqueI;
     
@@ -143,15 +144,15 @@ IFEXPRESSION: OPENBRACE INSTRACTION RETURNEXPRESSION CLOSEBRACE{
 
 };
 RETURNEXPRESSION: RETURN OPENSEP EXPRESSION CLOSESEP{
-    sprintf(ENDIFetique,"etique %d",ENDIFetiqueI);
-    printf("QUAD EXPRESSION RETURN %s %d\n",ENDIFetique,ligne);
-    ENDIFetiqueI++;
-    ENDIFetiqueC=ENDIFetiqueI;
+    ENDIFetiqueC--;
+    sprintf(ENDIFetique,"ENDIFetique %d",ENDIFetiqueI);
+    push_qdr(&ListQdr,"BR",ENDIFetique,"","");
 };
 ENDIFEXPRESSION: ELSECASE END_IF{
     //push END_IF;
-    ENDIFetiqueC--;
-    sprintf(ENDIFetique,"etique %d",ENDIFetiqueC);
+    ENDIFetiqueI++;
+    ENDIFetiqueC=ENDIFetiqueI;
+    sprintf(ENDIFetique,"ENDIFetique %d",ENDIFetiqueC);
     printf("changing %s of END iF\n",ENDIFetique);
 };
 FOREXPRESSION: OPENSEP SIGN IDF INDEX TWOP VALUE TWOP FORCONDITION CLOSESEP ENDFOREXPRESSION{
@@ -172,10 +173,7 @@ IDFI: IDF INDEX{
 };
 IDFINSTRACTION: IDFI TypeExp EOI{
     //quad the instraction list
-        Print(EXPRESSIONList);
         qdr *tmp=qdrExpression(Postfix(EXPRESSIONList));
-        print_qdr(tmp);
-
         AddQdr(&ListQdr,tmp);
         while(isEmpty(EXPRESSIONList)==0){
             Pop(&EXPRESSIONList);
@@ -215,14 +213,16 @@ OPER: DIV{ Pushf(&EXPRESSIONList,$1); }
 SIGN: {}| SUB{
     Pushf(&EXPRESSIONList,"m");
 };
-CONDITION: EXPRESSION DOLOGIC_OP EXPRESSION{
-    Print(EXPRESSIONList);
+CONDITION: DoEXPRESSION LOGIC_OP DoEXPRESSION{
+    printf("[ %s %s ]",lastvar,after);
+};
+DoEXPRESSION: EXPRESSION{
+    PrintL(EXPRESSIONList);
+    qdr *tmp=qdrExpression(Postfix(EXPRESSIONList));
+    AddQdr(&ListQdr,tmp);
     while(isEmpty(EXPRESSIONList)==0){
         Pop(&EXPRESSIONList);
     }
-};
-DOLOGIC_OP: LOGIC_OP{
-    Pushf(&EXPRESSIONList,$1);
 };
 INDEX: {        
     sprintf($$,"\0");
@@ -252,7 +252,9 @@ int yyerror(char* msg){
 }
 
 int main(int argc, char *argv[]){
-    F = fopen(argv[2],"w");
+    F = fopen("Lexical.txt","w");
+    QuadF = fopen("Quadriples.txt","w");
+    DeclarationF=fopen("DeclarationF.txt","w");
     if( F== NULL)
         {printf("file couldn't be created");
         return (-1);}

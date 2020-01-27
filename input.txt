@@ -16,7 +16,6 @@ BEGIN
     Z[X]=D£
     Z[X]£
     X = (5) £
-    X = (5) / 0000000 £
     Z£
     L = 5 + Z - L * (Z / X)+
     Z[5] - D £
@@ -41,9 +40,6 @@ BEGIN
         RETURN (Z)
     }
     END_IF
-    FOR (X : 1 : X==100)
-        Z= D+Z£
-    END_FOR
     //GET(«%» : @ Z)//£//
     SHOW(«Z: %» : Z)£
 

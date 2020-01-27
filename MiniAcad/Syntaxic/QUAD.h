@@ -86,7 +86,7 @@ void print_qdr(qdr *head)
     qdr *current = head;
     int i=1;
     while(current != NULL){
-        printf("%d- (%s, %s, %s, %s) \n", i, current->oper, current->op1, current->op2, current->res);
+        fprintf(QuadF,"%d- (%s, %s, %s, %s) \n", i, current->oper, current->op1, current->op2, current->res);
         current = current->next;
         i++;
     }

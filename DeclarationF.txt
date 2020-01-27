@@ -1,0 +1,8 @@
+ X type is 0
+ Y  Z type is 1
+ K  L array type is 0[20]
+CONST D=5 INT
+CONST S=dedf STRING
+CONST F=5.2 FLOAT
+CONST F2=532.2 FLOAT
+CONST C=dedf STRING

@@ -162,6 +162,16 @@ qdr* qdrExpression(List *head){
             char *op = Pop(&head);
             char *op2 = Pop(&pile);
             sprintf(res, "t%d", qumtem);
+            if(ConditionPos==0){
+                lastvar=(char*)malloc(strlen(res)*sizeof(char));
+                sprintf(lastvar, "t%d", qumtem);
+            }else{
+                after=(char*)malloc(strlen(res)*sizeof(char));
+                sprintf(after, "t%d", qumtem);
+            }
+            ConditionPos++;
+            ConditionPos=ConditionPos%2;
+            
             qumtem++;
             switch(op[0]){
                 case 'm':  {
