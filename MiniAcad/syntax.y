@@ -27,8 +27,7 @@
 
 %%
 prog: PROGRAM IDF DECLARATION BEGI INSTRACTION END{
-    AssignConst($2, 0, "0\0");
-    printf("\nNo Syntax Error");
+    AssignConst($2, 0, "0");
 };
 DECLARATION: | var FIRSTVAR TypeDECLARATION EOI DECLARATION
     | CONSTDECLARATION DECLARATION
@@ -108,11 +107,82 @@ INSTRACTION: | IDFINSTRACTION INSTRACTION
     | GETINSTRACTION INSTRACTION
     ;
 
-GETINSTRACTION: GET OPENSEP STRING TWOP ADDRESS IDF INDEX CLOSESEP EOI{
-    get($3,$6,atoi($7));
+GETINSTRACTION: GET OPENSEP STRING TWOP ADDRESS IDFI CLOSESEP EOI{
+    //get($3,$5,atoi($7));
+    if(strlen($3)>1)
+        SementicError("Get 1st String must be one char");
+    element* tmpp=search_IDF($6);
+    if(tmpp==NULL)
+        SementicError("Unk");
+    char sss[30];
+    switch($3[0]){
+        case '$':
+            if(tmpp->type!=0) {
+                sprintf(sss,"IDF %s isn't a INT",$3);
+                SementicError(sss);
+            } 
+                break;
+        case '%':
+            if(tmpp->type!=1) {
+                sprintf(sss,"IDF %s isn't a FLOAT",$3);
+                SementicError(sss);
+            } 
+                break;
+        case '#':
+            if(tmpp->type!=3) {
+                sprintf(sss,"IDF %s isn't a STRING",$3);
+                SementicError(sss);
+            } 
+                break;
+        case '&':
+            if(tmpp->type!=2)  {
+                sprintf(sss,"IDF %s isn't a CHAR",$3);
+                SementicError(sss);
+            }
+                break;
+        default:
+            sprintf(sss,"%s isn't a GET Symbole",$3);
+            SementicError(sss);
+    }
+    push_qdr(&ListQdr,"GET",$3,$6,"");
 };
-SHOWINSTRACTION: SHOW OPENSEP STRING TWOP IDF INDEX CLOSESEP EOI{
-    show($3,$5,atoi($6));
+SHOWINSTRACTION: SHOW OPENSEP STRING TWOP IDFI CLOSESEP EOI{
+    //show($3,$5,atoi($6));
+    element* tmpp=search_IDF($5);
+    if(tmpp==NULL)
+        SementicError("Unk");
+    int Inx=0;
+    char ss[40];
+    while(Inx<strlen($3)){
+        switch($3[Inx]){
+            case '$':
+                if(tmpp->type!=0)  {
+                    sprintf(ss,"IDF %s isn't an INT",$5);
+                    SementicError(ss);
+                }
+                break;
+            case '%':
+                if(tmpp->type!=1){
+                    sprintf(ss,"IDF %s isn't a FLOAT",$5);
+                    SementicError(ss);
+                }  
+                break;
+            case '#':
+                if(tmpp->type!=3)  {
+                    sprintf(ss,"IDF %s isn't a STRING",$5);
+                    SementicError(ss);
+                }
+                break;
+            case '&':
+                if(tmpp->type!=2)  {
+                    sprintf(ss,"IDF %s isn't a CHAR",$5);
+                    SementicError(ss);
+                }
+                break;
+        }
+        Inx++;
+    }
+    push_qdr(&ListQdr,"SHOW",$3,$5,"");
 };
 FORINSTRACTION: FORETI FOREXPRESSION END_FOR {
     //change END for etique
@@ -130,7 +200,6 @@ IFINSTRACTION: IF IFCONDITION TWOP IFEXPRESSION ENDIFEXPRESSION{
         //pop END_IFx
     };
 IFCONDITION:OPENSEP CONDITION CLOSESEP{
-    push_qdr(&ListQdr,"=","","result","Condition");
     sprintf(ELSEetique,"etique %d",ELSEetiqueI);
     push_qdr(&ListQdr,"BZ",ELSEetique,"Condition","");
     ELSEetiqueI++;
@@ -214,10 +283,9 @@ SIGN: {}| SUB{
     Pushf(&EXPRESSIONList,"m");
 };
 CONDITION: DoEXPRESSION LOGIC_OP DoEXPRESSION{
-    printf("[ %s %s ]",lastvar,after);
+    push_qdr(&ListQdr,$2,lastvar,after,"Condition");
 };
 DoEXPRESSION: EXPRESSION{
-    PrintL(EXPRESSIONList);
     qdr *tmp=qdrExpression(Postfix(EXPRESSIONList));
     AddQdr(&ListQdr,tmp);
     while(isEmpty(EXPRESSIONList)==0){
@@ -263,6 +331,7 @@ int main(int argc, char *argv[]){
     if (yyin == NULL)
         printf("File doesn't exist");
     else yyparse();
+    printf("\nProgram Ended\n");
     printf("\n");
     print_TS();
     fclose(F);

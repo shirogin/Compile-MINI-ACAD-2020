@@ -181,8 +181,15 @@ qdr* qdrExpression(List *head){
                 }
                 case '=': {
                     qumtem--;
+                    
                     char *op1 = Pop(&pile);
-                    push_qdr(&qdrs, op, op1, "", op2);
+                    element* tmpE;
+                    
+                    push_qdr(&qdrs, op, op2, "", op1);
+                    if(( tmpE=search_IDF(op1))!=NULL && tmpE->size==0){
+                        printf("\033[1;33mSementic Error in line %d  colom %d : %s \n\033[0m",ligne,colom-strlen(yytext),"This IDF is available for Read Only (Constant)");
+                        exit(-1);
+                    }
                     break;
                 }
                 case '/':
